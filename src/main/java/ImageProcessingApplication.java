@@ -90,4 +90,8 @@ class ImageProcessingApplication {
         imageLabel.setIcon(icon);
         frame.repaint();
     }
+
+    public BufferedImage getOriginalImage() {return originalImage;}
+
+    public BufferedImage getProcessedImage() {return processedImage;}
 }
