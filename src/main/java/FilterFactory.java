@@ -1,7 +1,7 @@
 
 // Factory class for creating filters
 interface  FilterFactory {
-    public ImageFilter createFilter();
+    public  ImageFilter createFilter();
 }
 
 // Factory for  Grayscale filter
@@ -11,9 +11,7 @@ class GrayscaleFilterFactory implements FilterFactory {
 
 // Factory for Sepia filter
 class SepiaFilterFactory implements FilterFactory {
-    public ImageFilter createFilter() {
-        return new SepiaFilter();
-    }
+    public ImageFilter createFilter() {return new SepiaFilter();}
 }
 
 // Factory for  Blur filter

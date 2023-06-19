@@ -1,6 +1,7 @@
 
-class ChooseFilterFactory  {
-    public static ImageFilter createFilter(String filterType) {
+class ChooseFilterFactory {
+
+    public  ImageFilter createFilter(String filterType) {
 
         return switch (filterType) {
             case "grayscale" -> new GrayscaleFilterFactory().createFilter();
@@ -9,4 +10,6 @@ class ChooseFilterFactory  {
             default -> throw new IllegalArgumentException("Invalid filter type: " + filterType);
         };
     }
+
 }
+

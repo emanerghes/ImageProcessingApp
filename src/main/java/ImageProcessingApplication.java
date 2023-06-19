@@ -5,11 +5,16 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+
 class ImageProcessingApplication {
     private BufferedImage originalImage;
     private BufferedImage processedImage;
     private JFrame frame;
     private JLabel imageLabel;
+    ProxyImageFilter filter = new ProxyImageFilter();
+
+
+     // Loads an image from the specified file path and displays it.
 
     public synchronized void loadImage(String filePath) {
         try {
@@ -21,12 +26,15 @@ class ImageProcessingApplication {
         }
     }
 
+
+    // Applies the specified filter to the current image and displays the processed image.
     public synchronized void applyFilter(String filterType) {
-        ImageFilter filter = ChooseFilterFactory.createFilter(filterType);
-        processedImage = filter.applyFilter(originalImage);
+        processedImage = filter.createFilter(processedImage, filterType);
         displayImage(processedImage);
     }
 
+
+     // Saves the processed image to the specified output path.
     public void saveImage(String outputPath) {
         try {
             ImageIO.write(processedImage, "PNG", new File(outputPath));
@@ -36,11 +44,16 @@ class ImageProcessingApplication {
         }
     }
 
+
+     //Reverts the processed image back to the original image and displays it.
     public synchronized void revertToOriginal() {
         processedImage = originalImage;
         displayImage(processedImage);
     }
 
+    /*
+     Displays the specified image in the application's frame.
+     */
     private void displayImage(BufferedImage image) {
         if (frame == null) {
             frame = new JFrame("Image Processing Application");
@@ -89,5 +102,13 @@ class ImageProcessingApplication {
         ImageIcon icon = new ImageIcon(image);
         imageLabel.setIcon(icon);
         frame.repaint();
+    }
+
+    public BufferedImage getOriginalImage() {
+        return originalImage;
+    }
+
+    public BufferedImage getProcessedImage() {
+        return processedImage;
     }
 }
